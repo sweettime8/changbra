@@ -1,0 +1,499 @@
+{% extends "layout.html" %}
+{% block body %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Products</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Products</a></li>
+                                    <li class="breadcrumb-item active">Products List</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">
+                                        <div class="search-box me-2 mb-2 d-inline-block">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" id="searchTableList"
+                                                       placeholder="Search...">
+                                                <i class="bx bx-search-alt search-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="text-sm-end">
+                                            <button type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#newProductModal"
+                                                    class="btn btn-success btn-rounded waves-effect waves-light addProduct-modal mb-2">
+                                                <i class="mdi mdi-plus me-1"></i> Add Product
+                                            </button>
+                                        </div>
+                                    </div><!-- end col-->
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100"
+                                           id="userList-table">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" style="width: 40px;">Ảnh</th>
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col">Loại</th>
+                                            <th scope="col">Nhãn hiệu</th>
+                                            <th scope="col">Có thể bán</th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Ngày khởi tạo</th>
+                                            <th scope="col" style="width: 200px;">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="avatar-xs"><span
+                                                        class="avatar-title rounded-circle">D </span></div>
+                                            </td>
+                                            <td>
+                                                <p class="text-muted mb-0">Charm Hoa hồng </p></td>
+                                            <td>Có gọng không mút</td>
+                                            <td>
+                                                <div>
+                                                    <a class="badge badge-soft-primary font-size-11 m-1"
+                                                       href="/contacts-list#1">Charm</a>
+                                                </div>
+                                            </td>
+                                            <td>125</td>
+                                            <td>
+                                                <div>
+                                                    <a class="badge badge-soft-info font-size-11 m-1"
+                                                       href="/contacts-list#1">Đang giao dich</a>
+                                                </div>
+                                            </td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <div class="d-flex gap-3"><a class="text-success" href="/contacts-list"><i
+                                                        class="mdi mdi-pencil font-size-18" id="edittooltip"></i></a><a
+                                                        class="text-danger" href="/contacts-list"><i
+                                                        class="mdi mdi-delete font-size-18" id="deletetooltip"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <!-- end table responsive -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Skote.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by Themesbrand
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="newProductModal" tabindex="-1" aria-labelledby="newProductModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newProductModalLabel">Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation createProduct-form" id="createProduct-form" novalidate>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="username-input" class="form-label">Tên sản phẩm</label>
+                                    <input type="text" id="inputProductName" class="form-control"
+                                           placeholder="Tên sản phẩm"
+                                           required/>
+                                    <div class="invalid-feedback">Cần nhập tên sản phẩm</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formrow-code-input" class="form-label">Mã sản phẩm/SKU</label>
+                                            <input type="text" class="form-control" id="formrow-code-input"
+                                                   placeholder="Mã sản phẩm">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="formrow-weight-input" class="form-label">Khối lượng</label>
+                                            <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                                                  <span class="input-group-btn input-group-prepend">
+                                                    <button tabindex="-1"
+                                                            class="btn btn-primary bootstrap-touchspin-down"
+                                                            type="button">−</button>
+                                                  </span>
+                                                <span class="input-group-addon bootstrap-touchspin-prefix input-group-prepend">
+                                                    <span class="input-group-text">g</span>
+                                                  </span><input data-toggle="touchspin" type="text" data-bts-prefix="g"
+                                                                class="form-control" id="formrow-weight-input">
+
+                                                <span class="input-group-btn input-group-append">
+                                                    <button tabindex="-1" class="btn btn-primary bootstrap-touchspin-up"
+                                                            type="button">+</button>
+                                                  </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="inputRetailPrice">Giá bán lẻ</label>
+                                            <input type="text" class="form-control" id="inputRetailPrice"
+                                                   placeholder="Giá bán lẻ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="inputWholesalePrice">Giá bán buôn</label>
+                                            <input type="text" class="form-control" id="inputWholesalePrice"
+                                                   placeholder="Giá bán buôn">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="inputEntryPrice">Giá nhập</label>
+                                            <input type="text" class="form-control" id="inputEntryPrice"
+                                                   placeholder="Giá nhập">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-3">Product Images</h4>
+
+                                            <div class="dropzone">
+                                                <div class="fallback">
+                                                    <input name="file" type="file" multiple="multiple">
+                                                </div>
+                                                <div class="dz-message needsclick">
+                                                    <div class="mb-3">
+                                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                                    </div>
+
+                                                    <h4>Drop files here or click to upload.</h4>
+                                                </div>
+                                            </div>
+
+                                            <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                                <li class="mt-2" id="dropzone-preview-list">
+                                                    <!-- This is used as the file preview template -->
+                                                    <div class="border rounded">
+                                                        <div class="d-flex p-2">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm bg-light rounded">
+                                                                    <img data-dz-thumbnail
+                                                                         class="img-fluid rounded d-block"
+                                                                         src="https://img.themesbrand.com/judia/new-document.png"
+                                                                         alt="Dropzone-Image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                <div class="pt-1">
+                                                                    <h5 class="fs-md mb-1" data-dz-name>&nbsp;</h5>
+                                                                    <p class="fs-sm text-muted mb-0" data-dz-size></p>
+                                                                    <strong class="error text-danger"
+                                                                            data-dz-errormessage></strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-shrink-0 ms-3">
+                                                                <button data-dz-remove class="btn btn-sm btn-danger">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div> <!-- end card-->
+                                </div>
+
+                                <!-- row thuoc tinh (mau sac, kich thuoc)-->
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tên thuộc tính</label>
+                                            <input type="text" class="form-control"
+                                                   value="Kích thước" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control"
+                                                   value="Màu sắc" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Giá trị</label>
+                                            <input type="text" class="form-control" id="sizeInputID" value=""
+                                                   required="" data-role="tagsinput" onchange="insertTable()">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="colorInputID" value=""
+                                                   required="" data-role="tagsinput" onchange="insertTable()">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end row -->
+
+
+                                <!-- row phien ban -->
+                                <div class="row">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Phiên Bản</h5>
+                                        </div>
+
+                                        <div class="card-body" style="padding-top:1rem; padding-bottom:1rem">
+                                            <div class="table-responsive mrd-table">
+                                                <table class="table table-hover mb-0" id="products-table"
+                                                       style="overflow-y: hidden;">
+                                                    <tr>
+                                                        <th>
+                                                            Tên phiên bản
+                                                        </th>
+                                                        <th class="mrd-th">Mã SKU</th>
+                                                        <th class="mrd-th">Barcode</th>
+                                                        <th class="mrd-th">Tồn ban đầu</th>
+                                                    </tr>
+
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                                <button type="button" id="addContact-btn" class="btn btn-success"
+                                        onclick="saveProducts()">Add Product
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- end modal body -->
+            </div>
+            <!-- end modal-content -->
+        </div>
+        <!-- end modal-dialog -->
+    </div>
+    <!-- end newContactModal -->
+
+
+    <script>
+        function insertTable() {
+            // Lấy tham chiếu đến bảng
+            const table = document.getElementById("products-table");
+
+            // Kiểm tra xem bảng có tồn tại không
+            if (table) {
+                // Lặp qua tất cả các hàng và loại bỏ chúng
+                while (table.rows.length > 1) {
+                    table.deleteRow(1);
+                }
+            }
+
+
+            // Lấy đối tượng input
+            let productName = document.getElementById("inputProductName").value;
+            let inputSizeElement = document.getElementById("sizeInputID").value;
+            let inputColorElement = document.getElementById("colorInputID").value;
+
+            let inputSizeArray = inputSizeElement.split(",")
+            let inputColorArray = inputColorElement.split(",")
+
+            if (inputSizeArray.length > 0) {
+                let productData = []
+                for (let i = 0; i < inputSizeArray.length; i++) {
+                    var product_detail = productName
+                    product_detail += " - " + inputSizeArray[i]
+                    if (inputColorArray.length > 0) {
+                        for (let j = 0; j < inputColorArray.length; j++) {
+                            let product_detail2 = product_detail + " - " + inputColorArray[j]
+                            productData.push(product_detail2)
+                        }
+                    } else {
+                        productData.push(product_detail)
+                    }
+
+                }
+
+                for (let i = 0; i < productData.length; i++) {
+                    const row = table.insertRow(); // Tạo một hàng mới
+                    row.insertCell().innerHTML = "                                            <div class=\"\">\n" +
+                        "                                                <div class=\"avatar-xs d-inline-block align-middle\">\n" +
+                        "                                                    <img src=\"{{ url_for('static', filename='images/users/avatar-1.jpg') }}\"\n" +
+                        "                                                         alt=\"user image\"\n" +
+                        "                                                         class=\"avatar-title rounded-circle\">\n" +
+                        "                                                </div>\n" +
+                        "                                                <span>" + productData[i] + "</span>\n" +
+                        "                                            </div>"
+                    row.insertCell().innerHTML = "<input type=\"text\" class=\"form-control\" value=\"\" placeholder=\"Mã SKU\">"
+                    row.insertCell().innerHTML = "<input type=\"text\" class=\"form-control\" value=\"\" placeholder=\"Barcode\">"
+                    row.insertCell().innerHTML = "<input type=\"text\" class=\"form-control\"\n" +
+                        "                                                   value=\"\" placeholder=\"Tồn ban đầu\">"
+
+                }
+            }
+        }
+
+        function handleImageClick() {
+            // Đây là nơi bạn có thể thêm mã xử lý tải lên ảnh
+            alert("Chọn ảnh để tải lên");
+        }
+
+
+        async function saveProducts() {
+            var table = document.getElementById("products-table");
+            var dataToSend = [];
+
+            let productName = document.getElementById("inputProductName").value;
+            let entryPrice = document.getElementById("inputEntryPrice").value;
+            let wholesalePrice = document.getElementById("inputWholesalePrice").value;
+            let retailPrice = document.getElementById("inputRetailPrice").value;
+
+            // Lặp qua các hàng của bảng
+            for (var i = 1; i < table.rows.length; i++) {
+                var rowData = {};
+
+                // Lặp qua các ô trong hàng
+                for (var j = 0; j < table.rows[i].cells.length; j++) {
+                    var inputElement = table.rows[i].cells[j].querySelector('input');
+                    if (inputElement) {
+                        rowData["cell" + j] = inputElement.value.trim();
+                    } else {
+                        var cellData = table.rows[i].cells[j].innerText || table.rows[i].cells[j].textContent;
+                        rowData["cell" + j] = cellData.trim();
+                    }
+
+                }
+
+                rowObject = {
+                    p_name: rowData.cell0,
+                    p_sku: rowData.cell1,
+                    p_barcode: rowData.cell2,
+                    p_initial: rowData.cell3
+                }
+
+                // console.log(rowObject)
+                // console.log(rowData)
+                // Thêm dữ liệu của hàng vào mảng
+                dataToSend.push(JSON.stringify(rowObject));
+            }
+
+            console.log("dataToSend : " + dataToSend)
+
+            const formData = new FormData();
+            formData.append("productName", productName);
+            formData.append("entryPrice", entryPrice);
+            formData.append("wholesalePrice", wholesalePrice);
+            formData.append("retailPrice", retailPrice);
+            formData.append("productDetail", dataToSend);
+
+
+            try {
+                // Gửi request POST đến Flask route "/connection-database"
+                const response = await fetch('/create-products', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success', // Icon thông báo (success, error, warning, info)
+                        text: data.message, // Nội dung thông báo
+                        timer: 4000, // Thời gian tự động tắt thông báo (5 giây)
+                        toast: true, // Thông báo kiểu toast (true) hoặc popup (false)
+                        position: 'top-end', // Vị trí hiển thị thông báo (top, top-start, top-end, center, center-start, center-end, bottom, bottom-start, bottom-end)
+                        showConfirmButton: false, // Ẩn nút xác nhận
+                    });
+
+                    $('#modalAddProduct').modal('hide');
+                }
+
+
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error', // Icon thông báo (success, error, warning, info)
+                    text: data.message, // Nội dung thông báo
+                    timer: 4000, // Thời gian tự động tắt thông báo (5 giây)
+                    toast: true, // Thông báo kiểu toast (true) hoặc popup (false)
+                    position: 'top-end', // Vị trí hiển thị thông báo (top, top-start, top-end, center, center-start, center-end, bottom, bottom-start, bottom-end)
+                    showConfirmButton: false, // Ẩn nút xác nhận
+                });
+            }
+
+
+        }
+
+    </script>
+{% endblock %}

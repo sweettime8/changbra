@@ -1,0 +1,42 @@
+ CREATE TABLE DANHMUCSANPHAM(
+	madanhmuc integer auto_increment,
+    tendanhmuc nvarchar(100),
+    hinhdanhmuc text,
+    primary key (madanhmuc)
+ );
+ 
+  CREATE TABLE SANPHAM(
+	masanpham integer auto_increment,
+    madanhmuc integer,
+    tensanpham nvarchar(100),
+    giatien varchar(50),
+    mota text,
+    hinhsanpham text,
+    primary key (masanpham),
+    constraint FK_SANPHAM_DANHMUC foreign key(madanhmuc) references DANHMUCSANPHAM(madanhmuc)
+ );
+ 
+CREATE TABLE MAUSANPHAM(
+	mamau integer auto_increment,
+    tenmau nvarchar(50),
+    primary key(mamau)
+);
+
+CREATE TABLE SIZESANPHAM(
+	masize integer auto_increment,
+    size nvarchar(20),
+    primary key(masize)
+);
+ 
+CREATE TABLE CHITIETSANPHAM(
+	machitietsanpham integer auto_increment,
+    masanpham integer,
+    masize integer,
+    mamau integer,
+    soluong integer,
+    ngaynhap varchar(50),
+    primary key(machitietsanpham),
+    constraint FK_CHITIET_SANPHAM foreign key (masanpham) references SANPHAM(masanpham),
+    constraint FK_CHITIET_SIZE foreign key (masize) references SIZESANPHAM(masize),
+    constraint FK_CHITIET_MAUSANPHAM foreign key (mamau) references MAUSANPHAM(mamau)
+);
