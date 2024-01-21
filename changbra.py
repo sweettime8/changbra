@@ -3,10 +3,12 @@ import webview
 from routers.dashboard import dashboard
 from routers.products import products
 from routers.warehouse import warehouse
+from routers.orders import order_router
 import configparser
 
 app.register_blueprint(dashboard)
 app.register_blueprint(products)
+app.register_blueprint(order_router)
 app.register_blueprint(warehouse)
 
 if __name__ == '__main__':

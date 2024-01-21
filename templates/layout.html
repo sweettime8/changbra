@@ -11,22 +11,22 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico')}}">
 
-                <!-- select2 css -->
-        <link href="{{ url_for('static', filename='libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-
-        <link href="{{ url_for('static', filename='libs/dropzone/dropzone.css')}}" rel="stylesheet" type="text/css" />
-
         <!-- Bootstrap Css -->
         <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-tagsinput.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/sweetalert2.min.css') }}">
+
+        <!-- select2 css -->
+        <link href="{{ url_for('static', filename='libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <link href="{{ url_for('static', filename='libs/dropzone/dropzone.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Icons Css -->
         <link href="{{ url_for('static', filename='css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{ url_for('static', filename='css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
         <!-- App js -->
-        <script src="{{ url_for('static', filename='js/plugin.js')}}"></script>
+{#        <script src="{{ url_for('static', filename='js/plugin.js')}}"></script>#}
 
     </head>
 
@@ -123,6 +123,18 @@
 
                             <li class="menu-title" key="t-apps">Apps</li>
 
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-file"></i>
+                                    <span key="t-Order">Order</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="/orders" key="t-create-order">Order</a></li>
+                                    <li><a href="#" key="t-list-order">List Order</a></li>
+                                    <li><a href="#" key="t-return">Customers return</a></li>
+                                </ul>
+                            </li>
+
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -131,8 +143,8 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="/products" key="t-products">Products</a></li>
-                                    <li><a href="ecommerce-product-detail.html" key="t-product-detail">Product Detail</a></li>
-                                    <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>
+{#                                    <li><a href="ecommerce-product-detail.html" key="t-product-detail">Product Detail</a></li>#}
+{#                                    <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>#}
                                     <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
                                     <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
                                     <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
@@ -182,9 +194,6 @@
         <!-- select 2 plugin -->
         <script src="{{ url_for('static', filename='libs/select2/js/select2.min.js') }}"></script>
 
-        <!-- Plugins js -->
-        <script src="{{ url_for('static', filename='libs/dropzone/dropzone-min.js') }}"></script>
-
         <!-- init js -->
         <script src="{{ url_for('static', filename='js/pages/ecommerce-select2.init.js') }}"></script>
 
@@ -192,6 +201,8 @@
         <script src="{{ url_for('static', filename='js/bootstrap-tagsinput.min.js') }}"></script>
         <!-- App js -->
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
     </body>
+
 
 </html>

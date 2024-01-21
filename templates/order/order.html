@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+{% block body %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Products</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Products</a></li>
+                                    <li class="breadcrumb-item active">Products List</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">
+                                        <div class="search-box me-2 mb-2 d-inline-block">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" id="searchTableList"
+                                                       placeholder="Search...">
+                                                <i class="bx bx-search-alt search-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="text-sm-end">
+                                            <button type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#newProductModal"
+                                                    class="btn btn-success btn-rounded waves-effect waves-light addProduct-modal mb-2">
+                                                <i class="mdi mdi-plus me-1"></i> Add Product
+                                            </button>
+                                        </div>
+                                    </div><!-- end col-->
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100"
+                                           id="userList-table">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" style="width: 40px;">Ảnh</th>
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col">Loại</th>
+                                            <th scope="col">Nhãn hiệu</th>
+                                            <th scope="col">Có thể bán</th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Ngày khởi tạo</th>
+                                            <th scope="col" style="width: 200px;">Action</th>
+                                        </tr>
+                                        </thead>
+                                        {% for item, total in list_products %}
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div><img class="rounded-circle avatar-xs" src="{{ url_for('static', filename='images/users/avatar-2.jpg')}}" alt=""></div>
+                                            </td>
+                                            <td>
+                                                <p class="text-muted mb-0">{{item.name}}</p></td>
+                                            <td>{{item.type}}</td>
+                                            <td>
+                                                <div>
+                                                    <a class="badge badge-soft-primary font-size-11 m-1"
+                                                       href="/contacts-list#1">Charm</a>
+                                                </div>
+                                            </td>
+                                            <td>{{total}}</td>
+                                            <td>
+                                                <div>
+                                                    <a class="badge badge-soft-info font-size-11 m-1"
+                                                       href="/contacts-list#1">Đang giao dich</a>
+                                                </div>
+                                            </td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <div class="d-flex gap-3">
+                                                    <a class="text-primary" href="/product-detail/{{item.id}}">
+                                                        <i class="mdi mdi-eye-outline font-size-18" id="detailtooltip"></i>
+                                                    </a>
+                                                    <a class="text-success" href="/contacts-list">
+                                                        <i class="mdi mdi-pencil font-size-18" id="edittooltip"></i>
+                                                    </a>
+                                                    <a class="text-danger" href="/contacts-list">
+                                                        <i class="mdi mdi-delete font-size-18" id="deletetooltip"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <!-- end table responsive -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Chang's Bra.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by Mrd
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+
+{% endblock %}

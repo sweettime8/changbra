@@ -66,22 +66,22 @@
                                             <th scope="col" style="width: 200px;">Action</th>
                                         </tr>
                                         </thead>
+                                        {% for item, total in list_products %}
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <div class="avatar-xs"><span
-                                                        class="avatar-title rounded-circle">D </span></div>
+                                                <div><img class="rounded-circle avatar-xs" src="{{ url_for('static', filename='images/users/avatar-2.jpg')}}" alt=""></div>
                                             </td>
                                             <td>
-                                                <p class="text-muted mb-0">Charm Hoa hồng </p></td>
-                                            <td>Có gọng không mút</td>
+                                                <p class="text-muted mb-0">{{item.name}}</p></td>
+                                            <td>{{item.type}}</td>
                                             <td>
                                                 <div>
                                                     <a class="badge badge-soft-primary font-size-11 m-1"
                                                        href="/contacts-list#1">Charm</a>
                                                 </div>
                                             </td>
-                                            <td>125</td>
+                                            <td>{{total}}</td>
                                             <td>
                                                 <div>
                                                     <a class="badge badge-soft-info font-size-11 m-1"
@@ -90,13 +90,21 @@
                                             </td>
                                             <td>05/12/2023</td>
                                             <td>
-                                                <div class="d-flex gap-3"><a class="text-success" href="/contacts-list"><i
-                                                        class="mdi mdi-pencil font-size-18" id="edittooltip"></i></a><a
-                                                        class="text-danger" href="/contacts-list"><i
-                                                        class="mdi mdi-delete font-size-18" id="deletetooltip"></i></a>
+                                                <div class="d-flex gap-3">
+                                                    <a class="text-primary" href="/product-detail/{{item.id}}">
+                                                        <i class="mdi mdi-eye-outline font-size-18" id="detailtooltip"></i>
+                                                    </a>
+                                                    <a class="text-success" href="/contacts-list">
+                                                        <i class="mdi mdi-pencil font-size-18" id="edittooltip"></i>
+                                                    </a>
+                                                    <a class="text-danger" href="/contacts-list">
+                                                        <i class="mdi mdi-delete font-size-18" id="deletetooltip"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
+
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                     <!-- end table -->
@@ -142,11 +150,17 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <label for="username-input" class="form-label">Tên sản phẩm</label>
+                                    <label for="inputProductName" class="form-label">Tên sản phẩm</label>
                                     <input type="text" id="inputProductName" class="form-control"
                                            placeholder="Tên sản phẩm"
                                            required/>
                                     <div class="invalid-feedback">Cần nhập tên sản phẩm</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputProductType" class="form-label">Loại sản phẩm</label>
+                                    <input type="text" id="inputProductType" class="form-control"
+                                           placeholder="Loại sản phẩm"
+                                    />
                                 </div>
 
                                 <div class="row">
@@ -159,7 +173,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="formrow-weight-input" class="form-label">Khối lượng</label>
+                                            <label for="inputProductWeight" class="form-label">Khối lượng</label>
                                             <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
                                                   <span class="input-group-btn input-group-prepend">
                                                     <button tabindex="-1"
@@ -169,7 +183,7 @@
                                                 <span class="input-group-addon bootstrap-touchspin-prefix input-group-prepend">
                                                     <span class="input-group-text">g</span>
                                                   </span><input data-toggle="touchspin" type="text" data-bts-prefix="g"
-                                                                class="form-control" id="formrow-weight-input">
+                                                                class="form-control" id="inputProductWeight">
 
                                                 <span class="input-group-btn input-group-append">
                                                     <button tabindex="-1" class="btn btn-primary bootstrap-touchspin-up"
@@ -209,7 +223,7 @@
                                         <div class="card-body">
                                             <h4 class="card-title mb-3">Product Images</h4>
 
-                                            <div class="dropzone">
+                                            <div class="dropzone" id="myDropzone">
                                                 <div class="fallback">
                                                     <input name="file" type="file" multiple="multiple">
                                                 </div>
@@ -342,8 +356,52 @@
     </div>
     <!-- end newContactModal -->
 
-
+    <!-- Plugins js -->
+    <script src="{{ url_for('static', filename='libs/dropzone/dropzone-min.js') }}"></script>
     <script>
+        // Sau khi thư viện đã được tải, tạo một phiên bản Dropzone
+        Dropzone.autoDiscover = false;
+
+        // Tiếp theo, bạn có thể tiếp tục sử dụng Dropzone như bình thường
+        var myDropzone;
+
+        myDropzone = new Dropzone("#myDropzone", {
+            url: "/uploads",
+            paramName: "file",
+            maxFilesize: 5,
+            addRemoveLinks: true,
+            init: function () {
+                var myDropzone = this;
+            }
+
+        });
+
+        // Sự kiện khi các file được thêm vào Dropzone
+        myDropzone.on("addedfile", function (file) {
+            console.log("File added:", file);
+            let productName = document.getElementById("inputProductName").value;
+            if (productName) {
+                // Thêm productName vào FormData
+                myDropzone.options.params = { productName: productName };
+                myDropzone.processQueue(); // Bắt đầu xử lý hàng đợi tải lên
+            }
+        });
+
+        // Sự kiện khi các file được gỡ bỏ khỏi Dropzone
+        myDropzone.on("removedfile", function (file) {
+            console.log("File removed:", file);
+        });
+
+        // Sự kiện khi quá trình tải lên hoàn tất
+        myDropzone.on("complete", function (file) {
+            console.log("Upload complete:", file);
+        });
+
+        // Sự kiện xảy ra khi có lỗi trong quá trình tải lên
+        myDropzone.on("error", function (file, errorMessage, xhr) {
+            console.error("Error uploading file:", file, errorMessage, xhr);
+        });
+
         function insertTable() {
             // Lấy tham chiếu đến bảng
             const table = document.getElementById("products-table");
@@ -411,6 +469,8 @@
             var dataToSend = [];
 
             let productName = document.getElementById("inputProductName").value;
+            let productType = document.getElementById("inputProductType").value;
+            let productWeight = document.getElementById("inputProductWeight").value;
             let entryPrice = document.getElementById("inputEntryPrice").value;
             let wholesalePrice = document.getElementById("inputWholesalePrice").value;
             let retailPrice = document.getElementById("inputRetailPrice").value;
@@ -448,10 +508,26 @@
 
             const formData = new FormData();
             formData.append("productName", productName);
+            formData.append("productType", productType);
+            formData.append("productWeight", productWeight);
             formData.append("entryPrice", entryPrice);
             formData.append("wholesalePrice", wholesalePrice);
             formData.append("retailPrice", retailPrice);
             formData.append("productDetail", dataToSend);
+
+            // Lặp qua danh sách các file và thêm vào FormData
+            // Lấy danh sách các file
+            // Kiểm tra xem Dropzone có file nào được chọn không
+            if (myDropzone && myDropzone.files.length > 0) {
+                const files = myDropzone.files;
+                // Lặp qua danh sách các file và thêm vào FormData
+                for (const file of files) {
+                    formData.append("files", file);
+                }
+            } else {
+                // Xử lý khi không có file nào được chọn từ Dropzone
+                console.error("No files selected from Dropzone.");
+            }
 
 
             try {

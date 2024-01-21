@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block body %}
+    <div class="main-content">
 
-</body>
-</html>
+        <div class="page-content">
+            <div class="container-fluid">
+                {% for item in product_detail %}
+
+                    {{ item.id }}
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
